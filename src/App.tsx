@@ -28,7 +28,7 @@ class App extends Component<{children}, {data}> {
 }
 
 const StyledApp = styled.div`
-  margin-left: 200px;
+  margin-left: 250px;
   padding: 50px;
 `
 
