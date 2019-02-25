@@ -30,6 +30,8 @@ class App extends Component<{children}, {data}> {
 const StyledApp = styled.div`
   margin-left: 250px;
   padding: 50px;
+  background-color: #eee;
+  height: 100vh;
 `
 
 export default App;

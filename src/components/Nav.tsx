@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from "styled-components";
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
+import {primary, secondary} from '../utilities';
 export function Nav() {
     return (
         <StyledNav>
             <div className="nav-brand">
-                <NavLink to="/"><h1>Fake Server</h1></NavLink>
+                <NavLink to="/"><h1>API Fake</h1></NavLink>
 
             </div>
             <div className="nav-content">
@@ -24,12 +25,15 @@ const StyledNav = styled.nav`
     width: 250px;
     display: flex;
     flex-direction: column;
-    background-color: #647ACB;
+    background-color: ${primary};
 
     .nav-brand{
-        padding:25px; 
-        background-color:#4c63b6;
+        padding:15px 25px; 
+        background-color:${secondary};
         color: white;
+        h1{
+            margin: 10px 0;
+        }
     }
 
     .nav-content{
@@ -45,9 +49,14 @@ const StyledNav = styled.nav`
             text-decoration:none;
             width:100%;
             border-radius: 4px;
+            transition: background-color 250ms;
 
             &.active {
-                background-color: #4c63b6;
+                background-color: ${secondary};
+            }
+
+            &:hover {
+                background-color: ${secondary};
             }
         }
 `

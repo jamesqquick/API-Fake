@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from "styled-components";
-
+import { Button } from "../elements/Button";
+import {Form } from "../elements/Form";
 export class EndpointForm extends Component<{dataRetrieved}, {url:string}> {
 
     constructor(props:any) {
@@ -9,11 +10,11 @@ export class EndpointForm extends Component<{dataRetrieved}, {url:string}> {
     }
   render() {
     return (
-        <StyledEndpointForm >
+        <Form >
             <label htmlFor="url">URL</label>
             <input type="text" name="url" onChange={this.onChange}/>
-            <button type="submit" onClick={this.onSubmit}>Test!</button>
-        </StyledEndpointForm>
+            <Button type="submit" onClick={this.onSubmit}>Test!</Button>
+        </Form>
     )
   }
 
@@ -36,34 +37,3 @@ export class EndpointForm extends Component<{dataRetrieved}, {url:string}> {
   }
 }
 
-const StyledEndpointForm = styled.form`
-    width:100%;
-
-    label {
-        display:block;
-    }
-    input,textarea {
-        width:100%;
-        margin: 5px 0 20px 0;
-        padding: 10px;
-    }
-
-    input {
-        height: 40px;
-    }
-
-    button {
-        height: 40px;
-        border: none;
-        background-color: purple;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 3px;
-        font-size: 16px;
-
-        &:hover {
-            cursor: pointer;
-            transform: scale(1.03)
-        }
-    }
-`
