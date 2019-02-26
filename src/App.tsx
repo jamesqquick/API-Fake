@@ -4,13 +4,14 @@ import './App.css';
 import { Nav } from './components/Nav';
 import styled from 'styled-components';
 import { DataForm } from './components/DataForm';
-import {EndpointForm} from './components/EndpointForm';
-import {DataDisplay} from './components/DataDisplay';
-class App extends Component<{children}, {data}> {
+import { EndpointForm } from './components/EndpointForm';
+import { DataDisplay } from './components/DataDisplay';
+import { lightGray } from "./utilities";
+class App extends Component<{ children }, { data }> {
 
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = {data:{}}
+    this.state = { data: {} }
   }
   render() {
     return (
@@ -21,16 +22,16 @@ class App extends Component<{children}, {data}> {
     );
   }
 
-  handleDataReceived = (data:any) => {
+  handleDataReceived = (data: any) => {
     console.log(data)
-    this.setState({data});
+    this.setState({ data });
   }
 }
 
 const StyledApp = styled.div`
   margin-left: 250px;
   padding: 50px;
-  background-color: #eee;
+  background-color: ${lightGray};
   height: 100vh;
 `
 
