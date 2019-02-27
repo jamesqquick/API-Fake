@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import styled from "styled-components";
-import {Button} from "../elements/Button";
-import {Form } from "../elements/Form";
+import { Button } from "../elements/Button";
+import { Form } from "../elements/Form";
 
 export class DataForm extends Component {
 
-    constructor(props:any){
+    constructor(props) {
         super(props);
         this.state = {
             url: "",
@@ -13,11 +13,11 @@ export class DataForm extends Component {
             response: ""
         }
     }
-    render(){
+    render() {
         return (
             <Form>
                 <label htmlFor="url">URL</label>
-                <input type="text" name="url" onChange={this.handleChange}/>
+                <input type="text" name="url" onChange={this.handleChange} />
                 <label htmlFor="status">Status</label>
                 <input type="number" name="status" onChange={this.handleChange} />
                 <label htmlFor="response">Response (json)</label>
@@ -27,39 +27,39 @@ export class DataForm extends Component {
         )
     }
 
-    handleResponseChange = (event:any) => {
+    handleResponseChange = (event) => {
         console.log("response change");
-        try{
+        try {
             const response = JSON.parse(event.target.value);
-            this.setState({response})
+            this.setState({ response })
         }
-        catch(e){
+        catch (e) {
             //notify not valid json
             //this.setState({response})
         }
     }
 
-    handleChange = (event:any) => {
+    handleChange = (event) => {
         this.setState({
-            [event.target.name]:event.target.value
+            [event.target.name]: event.target.value
         })
     }
 
-    submitData = async (event:any) => {
+    submitData = async (event) => {
         event.preventDefault();
-        try{
-            const res = await fetch("/data", 
-            {
-                method: "POST", 
-                body: JSON.stringify(this.state),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                  },
-            })
+        try {
+            const res = await fetch("/data",
+                {
+                    method: "POST",
+                    body: JSON.stringify(this.state),
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                })
             console.log(res);
         }
-        catch(err){
+        catch (err) {
             console.log(err);
         }
     }
