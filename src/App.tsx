@@ -9,7 +9,8 @@ import { DataDisplay } from './components/DataDisplay';
 import { lightGray } from "./utilities";
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
 import { Home } from "./components/Home";
-
+import { LoginPage } from './components/Login/LoginPage';
+import { RegisterPage } from './components/Register/RegisterPage';
 
 class App extends Component<{}, { data }> {
 
@@ -25,6 +26,9 @@ class App extends Component<{}, { data }> {
           <Route exact path="/" component={Home} />
           <Route path="/add" component={DataForm} />
           <Route path="/test" component={EndpointForm} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/register" component={RegisterPage} />
+
         </StyledApp>
       </Router >
     );

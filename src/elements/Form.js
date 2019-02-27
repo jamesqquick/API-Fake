@@ -1,6 +1,6 @@
 
 import styled from "styled-components";
-import { primary, secondary, gray, darkGray } from "../utilities";
+import { primary, darkGray } from "../utilities";
 
 export const Form = styled.form`
     width:100%;

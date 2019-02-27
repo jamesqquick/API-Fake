@@ -1,34 +1,29 @@
 import React, { Component } from 'react'
-import { LinkButton } from "../elements/Button";
-import { CenteredText } from "../utilities";
 import styled from "styled-components";
-import { Login } from "./Login";
+import { FirebaseContext } from './Firebase';
+import { NavLink } from "react-router-dom";
 export class Home extends Component {
 
-  constructor(props) {
-    super(props)
-
-  }
 
   loggedIn = false;
 
   render = () => {
     return (
-      <StyledHome>
-        {this.loggedIn &&
-          <>
-            <h1 className="title">Welcome to Fake API!</h1>
-            <h3 className="subtitle">The quickest and easiest way to mock up your API services!</h3>
-            <LinkButton href="/add">Add Data</LinkButton>
-          </>
-        }
-        {!this.loggedIn &&
-          <>
-            <Login></Login>
-          </>
-        }
+      <FirebaseContext.Consumer>
+        {firebase => {
+          console.log(firebase)
+          return (
 
-      </StyledHome>
+            <StyledHome>
+              <h1 className="title">Welcome to Fake API!</h1>
+              <h3 className="subtitle">The quickest and easiest way to mock up your API services!</h3>
+              <NavLink to="/login">Login</NavLink>
+              <NavLink to="/register">Register</NavLink>
+
+            </StyledHome>
+          )
+        }}
+      </FirebaseContext.Consumer>
     )
   }
 }
@@ -36,7 +31,4 @@ export class Home extends Component {
 const StyledHome = styled.div`
   text-align:center;
   margin-top:10%;
-
-
-
 `
