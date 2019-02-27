@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import styled from "styled-components";
 import { Button } from "../elements/Button";
 import { Form } from "../elements/Form";
-export class EndpointForm extends Component {
+
+class EndpointForm extends Component {
 
   constructor(props) {
     super(props);
@@ -36,4 +36,7 @@ export class EndpointForm extends Component {
     }
   }
 }
+
+export default EndpointForm;
+
 

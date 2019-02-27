@@ -1,3 +1,4 @@
 import UserContext from './context';
 import withAuthentication from './withAutentication';
-export { UserContext, withAuthentication };
+import withAuthorization, { conditions } from './withAuthorization';
+export { UserContext, withAuthentication, withAuthorization, conditions };

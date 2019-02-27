@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import styled from "styled-components";
 import { Button } from "../elements/Button";
 import { Form } from "../elements/Form";
 
-export class DataForm extends Component {
+class DataForm extends Component {
 
     constructor(props) {
         super(props);
@@ -64,6 +63,8 @@ export class DataForm extends Component {
         }
     }
 }
+
+export default DataForm;
 
 
 
