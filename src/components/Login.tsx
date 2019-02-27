@@ -7,10 +7,10 @@ export class Login extends Component {
 
     constructor(props) {
         super(props);
-        this.setState({
+        this.state = {
             username: "",
             password: ""
-        })
+        };
     }
 
     render() {

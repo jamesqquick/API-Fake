@@ -7,7 +7,11 @@ import { DataForm } from './components/DataForm';
 import { EndpointForm } from './components/EndpointForm';
 import { DataDisplay } from './components/DataDisplay';
 import { lightGray } from "./utilities";
-class App extends Component<{ children }, { data }> {
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom'
+import { Home } from "./components/Home";
+
+
+class App extends Component<{}, { data }> {
 
   constructor(props) {
     super(props);
@@ -15,10 +19,14 @@ class App extends Component<{ children }, { data }> {
   }
   render() {
     return (
-      <StyledApp className="App">
-        <Nav />
-        {this.props.children}
-      </StyledApp>
+      <Router>
+        <StyledApp className="App">
+          <Nav />
+          <Route exact path="/" component={Home} />
+          <Route path="/add" component={DataForm} />
+          <Route path="/test" component={EndpointForm} />
+        </StyledApp>
+      </Router >
     );
   }
 

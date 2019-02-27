@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from "styled-components";
 import { NavLink } from 'react-router-dom';
-import {primary, secondary} from '../utilities';
+import { primary, secondary } from '../utilities';
+
 export function Nav() {
     return (
         <StyledNav>
