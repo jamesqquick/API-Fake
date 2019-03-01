@@ -68,6 +68,14 @@ class RegisterFormBase extends Component {
         this.props.firebase
             .doCreateUserWithEmailAndPassword(email, password)
             .then(authUser => {
+                console.log("created user");
+                return this.props.firebase
+                    .user(authUser.user.uid)
+                    .set({
+                        username, email
+                    })
+            })
+            .then(() => {
                 this.setState({ ...INITIAL_STATE });
                 //TOOD: login and navigate to different page
                 this.props.history.push("/add");

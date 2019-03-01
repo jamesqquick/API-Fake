@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AuthUserContext from './context';
+import UserContext from './context';
 import { withFirebase } from '../Firebase';
 
 const withAuthentication = Component => {
@@ -29,9 +29,9 @@ const withAuthentication = Component => {
 
         render() {
             return (
-                <AuthUserContext.Provider value={this.state.authUser}>
+                <UserContext.Provider value={this.state.authUser}>
                     <Component {...this.props} />
-                </AuthUserContext.Provider>
+                </UserContext.Provider>
             );
         }
     }
