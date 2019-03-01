@@ -5,11 +5,6 @@ import { primary, secondary } from '../utilities';
 import { withFirebase } from './Firebase';
 import { Button } from '../elements/Button';
 import { UserContext } from './Auth';
-const SignOutButton = withFirebase(({ firebase }) => (
-    <Button type="button" onClick={firebase.doSignOut}>
-        Sign Out
-  </Button>
-));
 
 
 export class Nav extends Component {
@@ -31,7 +26,8 @@ export class Nav extends Component {
                                         <NavLink to="/add">Add Data</NavLink>
                                         <NavLink to="/test">Test Data</NavLink>
                                         <div className="divider"></div>
-                                        <SignOutButton />
+                                        <NavLink to="/logout">logout</NavLink>
+
                                     </>
                                 )}
                                 {!user && (

@@ -8,7 +8,9 @@ import { lightGray } from "./utilities";
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import { Home } from "./components/Home";
 import { LoginPage } from './components/Login/LoginPage';
+import LogoutPage from "./components/Login/LogoutPage";
 import { RegisterPage } from './components/Register/RegisterPage';
+
 import { withAuthentication, withAuthorization, conditions } from "./components/Auth";
 
 const App = () => {
@@ -23,6 +25,8 @@ const App = () => {
         <Route path="/test" component={withAuthorization(conditions.userLoggedIn)(EndpointForm)} />
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
+        <Route path="/logout" component={withAuthorization(conditions.userLoggedIn)(LogoutPage)} />
+
       </StyledApp>
     </Router >
   );

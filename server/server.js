@@ -2,15 +2,17 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
+require('dotenv').config()
+
 const firebase = require('firebase');
 
 const config = {
-    apiKey: "AIzaSyCpWEWJHU1EcEdwv1-tAhoEuiV_a2_U3gU",
-    authDomain: "api-fake-ecf0c.firebaseapp.com",
-    databaseURL: "https://api-fake-ecf0c.firebaseio.com",
-    projectId: "api-fake-ecf0c",
-    storageBucket: "api-fake-ecf0c.appspot.com",
-    messagingSenderId: "326456577763"
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
 };
 const firebaseApp = firebase.initializeApp(config);
 const db = firebaseApp.database();
@@ -47,15 +49,17 @@ app.all('/:userId/*', (req, res) => {
     const userId = req.params.userId;
 
     const urlParts = req.url.split("/");
+    console.log(urlParts);
     if (urlParts.length != 4) {
-        res.status(400).send({ msg: `Bad request` });
+        return res.status(400).send({ msg: `Bad request` });
     }
     const url = "/" + urlParts[2] + "/" + urlParts[3];
 
     db.ref(`users/${userId}/apis`).orderByChild('url').equalTo(url).once('value')
         .then(snapshot => {
+            console.log(snapshot.val());
             if (!snapshot.val()) {
-                res.status(404).send({ msg: `Could not find data for ${url}` });
+                return res.status(404).send({ msg: `Could not find data for ${url}` });
             }
             const data = snapshot.val();
             const keys = Object.keys(data);
