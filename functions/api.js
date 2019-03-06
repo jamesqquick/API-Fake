@@ -4,7 +4,7 @@ exports.handler = function(event, context, callback) {
   console.log("****************");
   const urlParts = event.path.split("/");
   console.log("url parts", urlParts);
-  const userId = urlParts[3];
+  const userId = urlParts[4];
   console.log("userid", userId);
   const url = "/" + urlParts.slice(5).join("/");
   console.log("url", url);
