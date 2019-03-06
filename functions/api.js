@@ -8,7 +8,7 @@ exports.handler = function(event, context, callback) {
   console.log("userid", userId);
   const url = "/" + urlParts.slice(5).join("/");
   console.log("url", url);
-  const request_url = `https://api-fake-test.firebaseio.com/users/${userId}/apis.json`;
+  const request_url = `https://api-fake.firebaseio.com/users/${userId}/apis.json`;
 
   axios
     .get(request_url)
