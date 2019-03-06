@@ -36,7 +36,10 @@ export default class ApisPage extends Component {
     return (
       <div>
         <h1>APIs Page</h1>
-        <p>You can access your API's at ...</p>
+        <p>
+          You can access your API's at
+          https://hardcore-liskov-ec6efe.netlify.com/.netlify/functions/api/mYw6HtlDsPN8OExPc1AnKcTvk3c2/**url-path**>
+        </p>
 
         {apis && apis.map((api, index) => <APIDisplay api={api} key={index} />)}
       </div>

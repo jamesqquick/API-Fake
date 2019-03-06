@@ -3,17 +3,17 @@ const axios = require("axios");
 exports.handler = function(event, context, callback) {
   console.log("****************");
   const urlParts = event.path.split("/");
-  console.log(urlParts);
+  console.log("url parts", urlParts);
   const userId = urlParts[3];
-  console.log(userId);
+  console.log("userid", userId);
   const url = "/" + urlParts.slice(3).join("/");
-  console.log(url);
+  console.log("url", url);
   const request_url = `https://api-fake-test.firebaseio.com/users/${userId}/apis.json`;
 
   axios
     .get(request_url)
     .then(res => {
-      console.log(res.data);
+      console.log("data", res.data);
       for (let key in res.data) {
         console.log(res.data[key].url, url);
         if (res.data[key].url == url) {
