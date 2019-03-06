@@ -3,6 +3,7 @@ const axios = require("axios");
 exports.handler = function(event, context, callback) {
   console.log("****************");
   const urlParts = event.path.split("/");
+  console.log(urlParts);
   const userId = urlParts[2];
   console.log(userId);
   const url = "/" + urlParts.slice(3).join("/");
@@ -16,11 +17,14 @@ exports.handler = function(event, context, callback) {
       for (let key in res.data) {
         console.log(res.data[key].url, url);
         if (res.data[key].url == url) {
+          console.log("Found it");
+          console.log(res.data[key]);
           return callback(null, {
             statusCode: 200,
             body: res.data[key].response
           });
         } else {
+          console.log("Data not found");
           return callback(null, {
             statusCode: 404,
             body: JSON.stringify({ msg: "Data not found" })

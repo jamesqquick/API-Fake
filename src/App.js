@@ -16,6 +16,7 @@ import {
   withAuthorization,
   conditions
 } from "./components/Auth";
+import ApisPage from "./components/ApisPage";
 
 const App = () => {
   return (
@@ -37,6 +38,10 @@ const App = () => {
         <Route
           path="/logout"
           component={withAuthorization(conditions.userLoggedIn)(LogoutPage)}
+        />
+        <Route
+          path="/apis"
+          component={withAuthorization(conditions.userLoggedIn)(ApisPage)}
         />
       </StyledApp>
     </Router>
