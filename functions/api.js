@@ -6,7 +6,7 @@ exports.handler = function(event, context, callback) {
   console.log("url parts", urlParts);
   const userId = urlParts[3];
   console.log("userid", userId);
-  const url = "/" + urlParts.slice(4).join("/");
+  const url = "/" + urlParts.slice(5).join("/");
   console.log("url", url);
   const request_url = `https://api-fake-test.firebaseio.com/users/${userId}/apis.json`;
 
