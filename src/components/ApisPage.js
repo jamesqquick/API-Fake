@@ -33,12 +33,16 @@ export default class ApisPage extends Component {
   }
   render() {
     const { apis } = this.state;
+    const userId = this.props.user.uid;
+    const firebaseUrl = process.env.REACT_APP_AUTH_DOMAIN;
+    console.log(firebaseUrl);
     return (
       <div>
         <h1>APIs Page</h1>
+        <p>User Id: {userId}</p>
+        <p>You can access your API's at the following url</p>
         <p>
-          You can access your API's at
-          https://hardcore-liskov-ec6efe.netlify.com/.netlify/functions/api/mYw6HtlDsPN8OExPc1AnKcTvk3c2/**url-path**>
+          {`https://www.${firebaseUrl}/.netlify/functions/api/${userId}/<your-api-url>`}
         </p>
 
         {apis && apis.map((api, index) => <APIDisplay api={api} key={index} />)}
