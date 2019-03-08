@@ -6,7 +6,7 @@ export default function APIDisplay({ api, userId }) {
 
   return (
     <Card>
-      <a href={`/.netlify/functions/api/${userId}${api.url}`}>{`/.netlify/${userId}/functions/api${api.url}`}</a>
+      <a href={`/.netlify/functions/api/${userId}${api.url}`}>{`/.netlify/functions/api/${userId}${api.url}`}</a>
       <p>Url: {api.url}</p>
       <p>Status: {api.status}</p>
       <p>Response:</p>
