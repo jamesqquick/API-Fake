@@ -42,7 +42,7 @@ export default class ApisPage extends Component {
         <p>User Id: {userId}</p>
         <p>You can access your API's at the following url</p>
         <p>
-          {`https://www.${firebaseUrl}/.netlify/functions/api/${userId}/<your-api-url>`}
+          {`/.netlify/functions/api/${userId}/<your-api-url>`}
         </p>
 
         {apis && apis.map((api, index) => <APIDisplay api={api} key={index} />)}
