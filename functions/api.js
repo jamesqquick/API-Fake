@@ -22,6 +22,7 @@ exports.handler = function (event, context, callback) {
   axios
     .get(request_url)
     .then(res => {
+      console.log("RESPONSE", res);
       return callback(null, {
         statusCode: 200,
         body: res.data.response
