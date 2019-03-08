@@ -45,7 +45,7 @@ export default class ApisPage extends Component {
           {`/.netlify/functions/api/${userId}/<your-api-url>`}
         </p>
 
-        {apis && apis.map((api, index) => <APIDisplay api={api} key={index} />)}
+        {apis && apis.map((api, index) => <APIDisplay api={api} key={index} userId={userId} />)}
       </div>
     );
   }
