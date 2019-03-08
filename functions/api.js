@@ -10,7 +10,7 @@ exports.handler = function (event, context, callback) {
   console.log("url parts", urlParts);
   const userId = urlParts[index + 1];
   console.log("userid", userId);
-  const url = "/" + urlParts.slice(index + 2).join("/");
+  let url = "/" + urlParts.slice(index + 2).join("/");
   url = encodeURIComponent(url);
   console.log("url ", url);
 
