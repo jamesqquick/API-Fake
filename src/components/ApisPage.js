@@ -38,7 +38,7 @@ export default class ApisPage extends Component {
     console.log(firebaseUrl);
     return (
       <div>
-        <h1>APIs Page</h1>
+        <h1>My APIs</h1>
         <p>User Id: {userId}</p>
         <p>You can access your API's at the following url</p>
         <p>
