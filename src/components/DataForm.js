@@ -58,9 +58,8 @@ class DataForm extends Component {
         console.log(this.state);
         this.props.firebase
             .userAPIs(this.props.user.uid)
-            .push({
-                ...this.state
-            })
+            .child(encodeURIComponent(this.state.url)) //the url is the key
+            .set(this.state)
             .then(() => {
                 console.log("Successfully saved endpoint");
                 this.setState({ ...this.INITIAL_DATA })
