@@ -16,6 +16,7 @@ export default class ApisPage extends Component {
       .once("value")
       .then(snapshot => {
         const data = snapshot.val();
+
         this.setState({
           apis: this.getAPIValuesFromFirebaseObject(data)
         })
@@ -27,6 +28,11 @@ export default class ApisPage extends Component {
   }
 
   getAPIValuesFromFirebaseObject(data) {
+
+    if (data == null) {
+      return null;
+    }
+
     const keysLength = Object.keys(data)
     let apis = [];
     if (keysLength === 0) {
