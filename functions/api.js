@@ -17,28 +17,15 @@ exports.handler = function (event, context, callback) {
   const databaseURL = process.env.REACT_APP_DATABASE_URL;
   console.log(databaseURL);
 
-  const request_url = `${databaseURL}/users/${userId}/apis.json`;
+  const request_url = `${databaseURL}/users/${userId}/apis/${url}`;
 
   axios
     .get(request_url)
     .then(res => {
-      for (let key in res.data) {
-        if (res.data[key].url == url) {
-          return callback(null, {
-            statusCode: 200,
-            body: res.data[key].response
-          });
-        } else {
-          console.log("Data not found");
-          return callback(null, {
-            statusCode: 404,
-            body: JSON.stringify({ msg: "Data not found" })
-          });
-        }
-      }
+      console.log(res.data)
       return callback(null, {
-        statusCode: 404,
-        body: JSON.stringify({ msg: "Data not found" })
+        statusCode: 200,
+        body: res.data.response
       });
     })
     .catch(err => {
