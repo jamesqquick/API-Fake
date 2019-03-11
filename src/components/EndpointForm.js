@@ -35,7 +35,7 @@ class EndpointForm extends Component {
   onSubmit = async (event) => {
     event.preventDefault();
     try {
-      const url = `/api/${this.props.user.uid}${this.state.url}`
+      const url = `/.netlify/functions/api/${this.props.user.uid}${this.state.url}`
       console.log(url);
       const res = await fetch(url);
       const data = await res.json();
