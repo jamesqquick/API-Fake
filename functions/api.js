@@ -10,14 +10,13 @@ exports.handler = function (event, context, callback) {
   console.log("url parts", urlParts);
   const userId = urlParts[index + 1];
   console.log("userid", userId);
-  let url = "/" + urlParts.slice(index + 2).join("/");
-  url = encodeURIComponent(url)
+  const url = "/" + urlParts.slice(index + 2).join("/");
   console.log("url ", url);
 
   const databaseURL = process.env.REACT_APP_DATABASE_URL;
   console.log(databaseURL);
 
-  const request_url = `${databaseURL}/users/${userId}/apis/${url}`;
+  const request_url = `${databaseURL}/users/${userId}/apis${url}.json`;
 
   axios
     .get(request_url)
