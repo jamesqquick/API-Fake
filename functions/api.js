@@ -21,7 +21,7 @@ exports.handler = function (event, context, callback) {
     .then(res => {
       console.log(res.data)
       return callback(null, {
-        statusCode: res.data.status,
+        statusCode: parseInt(res.data.status),
         body: res.data.response
       });
     })
