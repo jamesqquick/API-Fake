@@ -11,7 +11,7 @@ exports.handler = function (event, context, callback) {
   const userId = urlParts[index + 1];
   console.log("userid", userId);
   let url = "/" + urlParts.slice(index + 2).join("/");
-  url = encodeURI(url)
+  url = encodeURIComponent(url)
   console.log("url ", url);
 
   const databaseURL = process.env.REACT_APP_DATABASE_URL;
