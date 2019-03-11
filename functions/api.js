@@ -10,17 +10,18 @@ exports.handler = function (event, context, callback) {
   console.log("url parts", urlParts);
   const userId = urlParts[index + 1];
   console.log("userid", userId);
-  const url = encodeURIComponent("/" + urlParts.slice(index + 2).join("/"));
+  const url = "/" + urlParts.slice(index + 2).join("/");
+  url = encodeURIComponent(url);
   console.log("url ", url);
 
   const databaseURL = process.env.REACT_APP_DATABASE_URL;
+  console.log(databaseURL);
 
-  const request_url = `${databaseURL}/users/${userId}/apis${url}`;
+  const request_url = `${databaseURL}/users/${userId}/apis.json`;
 
   axios
     .get(request_url)
     .then(res => {
-      console.log(res)
       for (let key in res.data) {
         if (res.data[key].url == url) {
           return callback(null, {
