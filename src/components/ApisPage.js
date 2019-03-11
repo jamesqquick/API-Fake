@@ -5,7 +5,7 @@ export default class ApisPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      apis: null
+      apis: []
     };
   }
 
@@ -30,7 +30,7 @@ export default class ApisPage extends Component {
   getAPIValuesFromFirebaseObject(data) {
 
     if (data == null) {
-      return null;
+      return [];
     }
 
     const keysLength = Object.keys(data)
@@ -70,6 +70,7 @@ export default class ApisPage extends Component {
         <p>
           {`/.netlify/functions/api/${userId}/<your-api-url>`}
         </p>
+        {apis.length === 0 && <p>No apis yet...</p>}
 
         {apis && apis.map((api, index) => <APIDisplay api={api} key={index} userId={userId} />)}
       </div>

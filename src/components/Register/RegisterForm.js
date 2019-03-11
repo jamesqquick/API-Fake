@@ -70,7 +70,7 @@ class RegisterFormBase extends Component {
             const data = await this.props.firebase.username(username)
                 .once('value')
 
-            if (data !== null) {
+            if (data.val() !== null) {
                 return this.setState({
                     error: {
                         message: "Username is already taken."
