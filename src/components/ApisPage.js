@@ -16,20 +16,40 @@ export default class ApisPage extends Component {
       .once("value")
       .then(snapshot => {
         const data = snapshot.val();
-        console.log(data);
-        //iterate through keys and convert to array
-        const apis = [];
-        for (let key in data) {
-          console.log(key, data[key]);
-          apis.push(data[key]);
-        }
         this.setState({
-          apis
-        });
+          apis: this.getAPIValuesFromFirebaseObject(data)
+        })
+
       })
       .catch(err => {
         console.error(err);
       });
+  }
+
+  getAPIValuesFromFirebaseObject(data) {
+    const keysLength = Object.keys(data)
+    let apis = [];
+    if (keysLength === 0) {
+      return []
+    }
+    else if ('response' in data && 'status' in data && 'url' in data) {
+      if (keysLength === 3) {
+        return [data]
+      }
+      else {
+        apis.push({ response: data.response, status: data.status, url: data.url })
+      }
+    }
+
+    const reservedKeys = ["response", "status", "url"]
+    const filteredKeys = Object.keys(data).filter(key => !reservedKeys.includes(key));
+
+
+    filteredKeys.forEach(key => {
+      apis = [...apis, ...this.getAPIValuesFromFirebaseObject(data[key])]
+    });
+    return apis;
+
   }
   render() {
     const { apis } = this.state;
