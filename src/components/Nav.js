@@ -18,8 +18,8 @@ export class Nav extends Component {
             <div className="nav-content">
               {user && (
                 <>
-                  <NavLink to="/add">Add Data</NavLink>
-                  <NavLink to="/test">Test Data</NavLink>
+                  <NavLink to="/add">Add Endpoint</NavLink>
+                  <NavLink to="/test">Test Endpoint</NavLink>
                   <NavLink to="/apis">My APIs</NavLink>
                   <div className="divider" />
                   <NavLink to="/logout">logout</NavLink>
