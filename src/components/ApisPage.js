@@ -5,7 +5,7 @@ export default class ApisPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      apis: null
+      apis: []
     };
   }
 
@@ -16,20 +16,46 @@ export default class ApisPage extends Component {
       .once("value")
       .then(snapshot => {
         const data = snapshot.val();
-        console.log(data);
-        //iterate through keys and convert to array
-        const apis = [];
-        for (let key in data) {
-          console.log(key, data[key]);
-          apis.push(data[key]);
-        }
+
         this.setState({
-          apis
-        });
+          apis: this.getAPIValuesFromFirebaseObject(data)
+        })
+
       })
       .catch(err => {
         console.error(err);
       });
+  }
+
+  getAPIValuesFromFirebaseObject(data) {
+
+    if (data == null) {
+      return [];
+    }
+
+    const keysLength = Object.keys(data)
+    let apis = [];
+    if (keysLength === 0) {
+      return []
+    }
+    else if ('response' in data && 'status' in data && 'url' in data) {
+      if (keysLength === 3) {
+        return [data]
+      }
+      else {
+        apis.push({ response: data.response, status: data.status, url: data.url })
+      }
+    }
+
+    const reservedKeys = ["response", "status", "url"]
+    const filteredKeys = Object.keys(data).filter(key => !reservedKeys.includes(key));
+
+
+    filteredKeys.forEach(key => {
+      apis = [...apis, ...this.getAPIValuesFromFirebaseObject(data[key])]
+    });
+    return apis;
+
   }
   render() {
     const { apis } = this.state;
@@ -38,14 +64,15 @@ export default class ApisPage extends Component {
     console.log(firebaseUrl);
     return (
       <div>
-        <h1>APIs Page</h1>
+        <h1>My APIs</h1>
         <p>User Id: {userId}</p>
         <p>You can access your API's at the following url</p>
         <p>
-          {`https://www.${firebaseUrl}/.netlify/functions/api/${userId}/<your-api-url>`}
+          {`/.netlify/functions/api/${userId}/<your-api-url>`}
         </p>
+        {apis.length === 0 && <p>No apis yet...</p>}
 
-        {apis && apis.map((api, index) => <APIDisplay api={api} key={index} />)}
+        {apis && apis.map((api, index) => <APIDisplay api={api} key={index} userId={userId} />)}
       </div>
     );
   }

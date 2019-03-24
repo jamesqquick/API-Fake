@@ -1,14 +1,16 @@
 import React from "react";
 import { DataDisplay } from "./DataDisplay";
+import { Card } from "../elements/Card";
 
-export default function APIDisplay({ api }) {
+export default function APIDisplay({ api, userId }) {
+
   return (
-    <div>
-      <a href={`/functions/api${api.url}`}>{`/functions/api${api.url}`}</a>
+    <Card>
+      <a href={`/.netlify/functions/api/${userId}${api.url}`}>{`/.netlify/functions/api/${userId}${api.url}`}</a>
       <p>Url: {api.url}</p>
       <p>Status: {api.status}</p>
       <p>Response:</p>
       <DataDisplay data={JSON.parse(api.response)} />
-    </div>
+    </Card>
   );
 }

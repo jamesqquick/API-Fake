@@ -64,25 +64,51 @@ class RegisterFormBase extends Component {
     register = async (event) => {
         event.preventDefault();
         const { username, email, password } = this.state;
+        console.log("registering")
+        //Check that username does not exist first
+        try {
+            const data = await this.props.firebase.username(username)
+                .once('value')
 
-        this.props.firebase
-            .doCreateUserWithEmailAndPassword(email, password)
-            .then(authUser => {
-                console.log("created user");
-                return this.props.firebase
-                    .user(authUser.user.uid)
-                    .set({
-                        username, email
-                    })
+            if (data.val() !== null) {
+                return this.setState({
+                    error: {
+                        message: "Username is already taken."
+                    }
+                })
+
+            }
+            console.log(data.val());
+        }
+        catch (err) {
+            console.error(err);
+            return this.setState({
+                error: {
+                    message: "Failed to register... oops!"
+                }
             })
-            .then(() => {
-                this.setState({ ...INITIAL_STATE });
-                //TOOD: login and navigate to different page
-                this.props.history.push("/add");
-            })
-            .catch(error => {
-                this.setState({ error });
-            });
+        }
+
+        try {
+
+            const authUser = await this.props.firebase
+                .doCreateUserWithEmailAndPassword(email, password);
+            console.log(authUser);
+            await this.props.firebase
+                .user(authUser.user.uid)
+                .set({
+                    username, email
+                })
+            await this.props.firebase.username(username)
+                .set(authUser.user.uid)
+
+            this.setState({ ...INITIAL_STATE });
+            this.props.history.push("/add");
+
+        }
+        catch (error) {
+            this.setState({ error });
+        };
     }
 }
 

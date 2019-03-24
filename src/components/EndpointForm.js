@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from "../elements/Button";
 import { Form } from "../elements/Form";
-import styled from "styled-components";
+import { Card } from "../elements/Card";
 class EndpointForm extends Component {
 
   constructor(props) {
@@ -19,7 +19,7 @@ class EndpointForm extends Component {
         </Form>
         {
           this.state.response && (
-            <Code>{JSON.stringify(this.state.response)}</Code>
+            <Card>{JSON.stringify(this.state.response)}</Card>
           )
         }
       </>
@@ -35,7 +35,9 @@ class EndpointForm extends Component {
   onSubmit = async (event) => {
     event.preventDefault();
     try {
-      const res = await fetch(`${this.props.user.uid}${this.state.url}`);
+      const url = `/.netlify/functions/api/${this.props.user.uid}${this.state.url}`
+      console.log(url);
+      const res = await fetch(url);
       const data = await res.json();
       this.setState({ response: data })
       //this.props.dataRetrieved(data);
@@ -46,14 +48,7 @@ class EndpointForm extends Component {
   }
 }
 
-const Code = styled.pre`
-  background: white;
-  border-radius: 4px;
-  padding: 40px 10px;
-  width:100%;
-  max-width:600px;
-  margin: 40px auto;
-`
+
 
 export default EndpointForm;
 

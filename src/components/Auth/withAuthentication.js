@@ -9,16 +9,24 @@ const withAuthentication = Component => {
             super(props);
 
             this.state = {
-                authUser: null,
+                authUser: null
             };
         }
 
         componentDidMount() {
             this.listener = this.props.firebase.auth.onAuthStateChanged(
-                authUser => {
-                    authUser
-                        ? this.setState({ authUser })
-                        : this.setState({ authUser: null });
+                async (authUser) => {
+                    if (authUser) {
+                        // const data = await this.props.firebase.user(authUser.uid)
+                        //     .once('value')
+                        // const username = data.val().username;
+                        // authUser.username = username;
+
+                        this.setState({ authUser })
+                    }
+                    else {
+                        this.setState({ authUser: null });
+                    }
                 },
             );
         }

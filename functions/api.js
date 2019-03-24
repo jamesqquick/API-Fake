@@ -1,39 +1,28 @@
 const axios = require("axios");
+require("dotenv").config();
 
-exports.handler = function(event, context, callback) {
-  console.log("****************");
+exports.handler = function (event, context, callback) {
+
   const urlParts = event.path.split("/");
-  console.log("url parts", urlParts);
-  const userId = urlParts[4];
-  console.log("userid", userId);
-  const url = "/" + urlParts.slice(5).join("/");
-  console.log("url", url);
-  const request_url = `https://api-fake-ecf0c.firebaseio.com/users/${userId}/apis.json`;
+  //url format will be /api/user-id/url
+  const index = urlParts.indexOf("api");
+  const userId = urlParts[index + 1];
+  const url = "/" + urlParts.slice(index + 2).join("/");
+
+  console.log("****************");
+  console.log(userId, url);
+
+  const databaseURL = process.env.REACT_APP_DATABASE_URL;
+
+  const request_url = `${databaseURL}/users/${userId}/apis${url}.json`;
 
   axios
     .get(request_url)
     .then(res => {
-      console.log("data", res.data);
-      for (let key in res.data) {
-        console.log(res.data[key].url, url);
-        if (res.data[key].url == url) {
-          console.log("Found it");
-          console.log(res.data[key]);
-          return callback(null, {
-            statusCode: 200,
-            body: res.data[key].response
-          });
-        } else {
-          console.log("Data not found");
-          return callback(null, {
-            statusCode: 404,
-            body: JSON.stringify({ msg: "Data not found" })
-          });
-        }
-      }
+      console.log(res.data)
       return callback(null, {
-        statusCode: 404,
-        body: JSON.stringify({ msg: "Data not found" })
+        statusCode: parseInt(res.data.status),
+        body: res.data.response
       });
     })
     .catch(err => {

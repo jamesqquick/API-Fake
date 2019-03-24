@@ -15,12 +15,13 @@ class DataForm extends Component {
     render() {
         const { url, status, response } = this.state;
         const disabled = !url || !status || !response || !this.isJsonString(response);
+
         return (
             <Form>
                 <label htmlFor="url">URL</label>
                 <input type="text" name="url" onChange={this.handleChange} placeholder="ex. /posts/1" value={url} />
                 <label htmlFor="status">Status</label>
-                <input type="number" name="status" onChange={this.handleChange} value={status} />
+                <input type="number" name="status" onChange={this.handleChange} value={status} placeholder="200" />
                 <label htmlFor="response">Response (json)</label>
                 <textarea name="response" cols={30} rows={10} onChange={this.handleResponseChange} value={response}
                     placeholder={` ex. { "name": "James"}`}></textarea>
@@ -58,9 +59,8 @@ class DataForm extends Component {
         console.log(this.state);
         this.props.firebase
             .userAPIs(this.props.user.uid)
-            .push({
-                ...this.state
-            })
+            .child(this.state.url) //the url is the key
+            .set(this.state)
             .then(() => {
                 console.log("Successfully saved endpoint");
                 this.setState({ ...this.INITIAL_DATA })
